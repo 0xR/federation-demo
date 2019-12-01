@@ -33,7 +33,11 @@ const server = new ApolloServer({
       typeDefs,
       resolvers
     }
-  ])
+  ]),
+  formatResponse: response => {
+    console.log('Products: ', JSON.stringify(response, null, 2));
+    return response;
+  },
 });
 
 server.listen({ port: 4003 }).then(({ url }) => {

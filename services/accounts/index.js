@@ -32,7 +32,11 @@ const server = new ApolloServer({
       typeDefs,
       resolvers
     }
-  ])
+  ]),
+  formatResponse: response => {
+    console.log('Accounts: ', JSON.stringify(response, null, 2));
+    return response;
+  },
 });
 
 server.listen({ port: 4001 }).then(({ url }) => {

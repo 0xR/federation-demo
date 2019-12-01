@@ -34,7 +34,11 @@ const server = new ApolloServer({
       typeDefs,
       resolvers
     }
-  ])
+  ]),
+  formatResponse: response => {
+    console.log('Inventory: ', JSON.stringify(response, null, 2));
+    return response;
+  },
 });
 
 server.listen({ port: 4004 }).then(({ url }) => {

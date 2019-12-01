@@ -46,13 +46,17 @@ const resolvers = {
   }
 };
 
+
+const schema = buildFederatedSchema([{
+  typeDefs, resolvers
+}]);
+
 const server = new ApolloServer({
-  schema: buildFederatedSchema([
-    {
-      typeDefs,
-      resolvers
-    }
-  ])
+  schema: schema,
+  formatResponse: response => {
+    console.log('Review: ', JSON.stringify(response, null, 2));
+    return response;
+  },
 });
 
 server.listen({ port: 4002 }).then(({ url }) => {
